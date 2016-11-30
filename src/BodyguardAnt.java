@@ -2,9 +2,9 @@
 public class BodyguardAnt implements Containing
 {
 
-	Ant safeAnt;
-	Place place;
-	int remainingHealth;
+	private Ant safeAnt;
+	private Place place;
+	private int remainingHealth;
 	
 	@Override
 	public boolean addCannonFodder(Place safePlace) 
@@ -15,6 +15,7 @@ public class BodyguardAnt implements Containing
 			safeAnt.setHasCannonFodder(true);
 			this.place = safePlace;
 			this.safeAnt = place.getAnt();
+			this.remainingHealth = 2;
 		}
 		return success;
 	}
@@ -27,9 +28,19 @@ public class BodyguardAnt implements Containing
 	}
 
 	@Override
-	public Ant getSafeAnt() {
-		// TODO Auto-generated method stub
-		return null;
+	public Ant getSafeAnt() 
+	{
+		return this.place.getAnt();
+	}
+
+	public int getRemainingHealth() 
+	{
+		return remainingHealth;
+	}
+
+	public void setRemainingHealth(int remainingHealth) 
+	{
+		this.remainingHealth = remainingHealth;
 	}
 
 

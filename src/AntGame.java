@@ -348,20 +348,19 @@ public class AntGame extends JPanel implements ActionListener, MouseListener
 			if(place != tunnelEnd) //don't draw for queen location
 				g2d.drawImage(TUNNEL_IMAGE, rect.x, rect.y, null); //decorative image
 
-//			Containing containing = place.getCannonFodder();
+			Containing containing = place.getCannonFodder();
 			Ant ant = place.getAnt();
 			
 			if(ant != null)
 			{ //draw the ant if we have one
 				Image img = ANT_IMAGES.get(ant.getClass().getName());
-				System.out.println(ant.getClass().getName());
 				g2d.drawImage(img, rect.x+PLACE_PADDING.width, rect.y+PLACE_PADDING.height, null);
 			}
-//			if(containing != null)
-//			{ 
-//				Image img = ANT_IMAGES.get(containing.getClass().getName());
-//				g2d.drawImage(img, rect.x+PLACE_PADDING.width, rect.y+PLACE_PADDING.height, null);
-//			}
+			if(containing != null)
+			{ 
+				Image img = ANT_IMAGES.get(containing.getClass().getName());
+				g2d.drawImage(img, rect.x+PLACE_PADDING.width, rect.y+PLACE_PADDING.height, null);
+		}
 
 		}
 	}

@@ -125,31 +125,50 @@ public class AntColony
 	 */
 	public void deployAnt(Place place, Ant ant)
 	{
+		boolean hasAnt = (place.getAnt() != null);
+		boolean hasFodder = (place.getCannonFodder() != null);
+		boolean currentIsFodder = (ant instanceof Containing == true);
+		
 		if(this.food >= ant.getFoodCost())
 		{
 			if(place.isWater && ant.canSwim == false)
 			{
-				
 				System.out.println("That ant can't swim");
 			}
 			else if(place.isWater == false && ant.canSwim)
 			{
 				System.out.println("That ant must be placed in water");
 			}
-			else if(place.getAnt() != null)
+			else if(hasAnt && !currentIsFodder)
 			{
-				System.out.println("Already an ant in "+this);
+				System.out.println("There is already an ant here");
+			}
+			else if(hasFodder && currentIsFodder)
+			{
+				System.out.println("You already have one of those here");
 			}
 			else
 			{
 				this.food -= ant.getFoodCost();
-				place.addInsect(ant);
+				if(!currentIsFodder)
+				{
+					place.addInsect(ant);
+				}
+				else
+				{
+					place.addInsect((Containing) ant);
+				}
 			}
 		}
 		else
-			System.out.println("Not enough food remains to place "+ant);
+		{
+			System.out.println("Not enough food remains to place "+ ant);
+		}
+		
 	}
 
+	
+	
 	/**
 	 * Removes the ant inhabiting the given Place
 	 * @param place Where to remove the ant from
@@ -171,6 +190,8 @@ public class AntColony
 		{
 			if(p.getAnt() != null)
 				ants.add(p.getAnt());
+			if(p.getCannonFodder() != null)
+				ants.add((Ant)p.getCannonFodder());
 		}
 		return ants;
 	}

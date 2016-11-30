@@ -24,7 +24,7 @@ public class HungryAnt extends Ant
 		}
 		else if(hungry)
 		{
-			Bee dinner = place.getClosestBee(0,1);
+			Bee dinner = place.getClosestBee(0,0);
 			if(dinner != null)
 			{
 				dinner.reduceArmor(dinner.getArmor());

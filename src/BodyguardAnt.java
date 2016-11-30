@@ -1,46 +1,54 @@
 
-public class BodyguardAnt implements Containing
+public class BodyguardAnt extends Ant implements Containing
 {
-
-	private Ant safeAnt;
-	private Place place;
-	private int remainingHealth;
 	
+	private Ant safeAnt = null;
+	
+	
+	public BodyguardAnt() 
+	{
+		super(true, 2, 2);
+	}
+
 	@Override
-	public boolean addCannonFodder(Place safePlace) 
+	public boolean addSafeAnt(Ant ant) 
 	{
 		boolean success = false;
-		if(!safeAnt.isHasCannonFodder() && safePlace.getAnt() != null)
+		if(this.safeAnt == null && !ant.isCannonFodder)
 		{
-			safeAnt.setHasCannonFodder(true);
-			this.place = safePlace;
-			this.safeAnt = place.getAnt();
-			this.remainingHealth = 2;
+			this.safeAnt = ant;
+			success = true;
 		}
 		return success;
 	}
 
 	@Override
-	public boolean removeCannonFodder(Place unsafePlace) 
+	public boolean removeSafeAnt() 
 	{
-		// TODO Auto-generated method stub
-		return false;
+		boolean success = false;
+		if(this.safeAnt != null)
+		{
+			place.removeInsect(safeAnt);
+		}
+		return success;
 	}
 
 	@Override
 	public Ant getSafeAnt() 
 	{
-		return this.place.getAnt();
+		return this.safeAnt;
 	}
 
-	public int getRemainingHealth() 
+	@Override
+	public void act(AntColony colony) 
 	{
-		return remainingHealth;
+
 	}
 
-	public void setRemainingHealth(int remainingHealth) 
+	@Override
+	public void sacrifice() 
 	{
-		this.remainingHealth = remainingHealth;
+		this.place = null;
 	}
 
 

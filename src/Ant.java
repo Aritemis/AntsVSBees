@@ -7,7 +7,6 @@ public abstract class Ant extends Insect
 {
 	protected int foodCost; //the amount of food needed to make this ant
 	protected boolean visible;
-	private boolean hasCannonFodder = false;
 
 	/**
 	 * Creates a new Ant, with a food cost of 0.
@@ -26,6 +25,14 @@ public abstract class Ant extends Insect
 		this.foodCost = foodCost;
 		this.visible = true;
 	}
+	
+	public Ant(boolean isCannonFodder,int armor, int foodCost)
+	{
+		super(armor);
+		this.foodCost = foodCost;
+		this.visible = true;
+		this.isCannonFodder = isCannonFodder;
+	}
 
 	public Ant(int armor, int foodCost, boolean visible)
 	{
@@ -41,10 +48,6 @@ public abstract class Ant extends Insect
 		this.visible = visible;
 	}
 
-	public void setHasCannonFodder(boolean hasCannonFodder) 
-	{
-		this.hasCannonFodder = hasCannonFodder;
-	}
 
 	/**
 	 * Returns the ant's food cost
@@ -55,11 +58,6 @@ public abstract class Ant extends Insect
 		return foodCost;
 	}
 	
-	//this is the getter method for hasCannonFodder
-	public boolean isHasCannonFodder() 
-	{
-		return hasCannonFodder;
-	}
 
 	public boolean getVisibility()
 	{

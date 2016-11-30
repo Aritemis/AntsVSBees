@@ -26,7 +26,6 @@ public class Place
 		this.entrance = null;
 		this.bees = new ArrayList<Bee>();
 		this.ant = null;
-		this.cannonFodder = null;
 		this.isWater = isWater;
 	}
 
@@ -48,6 +47,7 @@ public class Place
 	{
 		this(theName, null, isWater);
 	}
+	
 	
 	/**
 	 * Returns the place's ant
@@ -141,11 +141,20 @@ public class Place
 	{
 		this.ant = newAnt;
 		newAnt.setPlace(this);
+		if(this.cannonFodder != null)
+		{
+			this.cannonFodder.addSafeAnt(newAnt);
+		}
 	}
 	
-	public void addInsect(Containing cannonFodder)
+	public void addInsect(Containing newFodder)
 	{
-		this.cannonFodder = cannonFodder;
+		this.cannonFodder = newFodder;
+		((Insect) newFodder).setPlace(this);
+		if(this.ant != null)
+		{
+			newFodder.addSafeAnt(this.ant);
+		}
 	}
 
 	/**
@@ -166,13 +175,30 @@ public class Place
 	{
 		if(this.ant == deadAnt)
 		{
+			this.ant.setPlace(null);
 			this.ant = null;
-			deadAnt.setPlace(null);
+			if(cannonFodder != null)
+			{
+				this.cannonFodder.removeSafeAnt();
+			}
 		}
 		else
+		{
 			System.out.println(deadAnt + " is not in "+this);
+		}
 	}
 
+	public void removeInsect(Containing deadFodder)
+	{
+		if(this.cannonFodder == deadFodder)
+		{
+			this.cannonFodder.sacrifice();
+			this.cannonFodder = null;
+		}
+		else
+			System.out.println(deadFodder + " is not in "+this);
+	}
+	
 	/**
 	 * Removes the bee from the place. If the given bee is not in this place, this method has no effect
 	 * @param deadBee The bee to remove from the place.

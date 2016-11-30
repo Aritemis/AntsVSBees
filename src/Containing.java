@@ -1,7 +1,8 @@
 
 public interface Containing 
 {	
-	public boolean addCannonFodder(Place safePlace);
-	public boolean removeCannonFodder(Place unsafePlace);
+	public boolean addSafeAnt(Ant safeAnt);
+	public boolean removeSafeAnt();
 	public Ant getSafeAnt();
+	public void sacrifice();
 }

@@ -24,6 +24,15 @@ public class Bee extends Insect
 	{
 		ant.reduceArmor(DAMAGE);
 	}
+	
+	/**
+	 * Deals damage to the given containing ant
+	 * @param ant The ant to sting
+	 */
+	public void sting(Containing ant)
+	{
+		((Insect) ant).reduceArmor(DAMAGE);
+	}
 
 	/**
 	 * Moves to the given place
@@ -74,8 +83,19 @@ public class Bee extends Insect
 	public void act(AntColony colony)
 	{
 		if (this.isInColony() && this.isBlocked())
-			sting(this.place.getAnt());
+		{
+			if(this.place.getCannonFodder() == null)
+			{
+				sting(this.place.getAnt());
+			}
+			else
+			{
+				sting(this.place.getCannonFodder());
+			}
+		}
 		else if(this.armor > 0)
+		{
 			this.moveTo(this.place.getExit());
+		}
 	}
 }

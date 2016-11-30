@@ -7,6 +7,7 @@ public abstract class Insect
 	protected int armor; 
 	protected Place place; 
 	protected boolean canSwim;
+	protected boolean isCannonFodder;  //A body guard, in other words
 
 	/**
 	 * Creates a new Insect with the given armor in the given location
@@ -20,6 +21,7 @@ public abstract class Insect
 		this.armor = theArmor;
 		this.place = thePlace;
 		this.canSwim = false;
+		this.isCannonFodder = false;
 	}
 
 	/**
@@ -30,12 +32,14 @@ public abstract class Insect
 	{
 		this(theArmor, null);
 		this.canSwim = false;
+		this.isCannonFodder = false;
 	}
 	
 	public Insect(int armor, boolean canSwim)
 	{
 		this(armor, null);
 		this.canSwim = canSwim;
+		this.isCannonFodder = false;
 	}
 
 	public Insect(int armor, Place place, boolean canSwim)
@@ -43,6 +47,7 @@ public abstract class Insect
 		this.armor = armor;
 		this.place = place;
 		this.canSwim = canSwim;
+		this.isCannonFodder = false;
 	}
 	
 	/**
@@ -89,10 +94,23 @@ public abstract class Insect
 	public void reduceArmor(int damage)
 	{
 		this.armor -= damage;
-		if(this.armor <= 0)
+		
+		if(this instanceof Containing == true)
 		{
-			System.out.println(this+" ran out of armor and expired");
-			leavePlace();
+			if(this.armor <= 0)
+			{
+				System.out.println(this + " gave its life to protect " + this.place.getAnt());
+				this.leavePlace();
+				place.removeInsect(place.getCannonFodder());
+			}
+		}
+		else
+		{
+			if(this.armor <= 0)
+			{
+				System.out.println(this+" ran out of armor and expired");
+				leavePlace();
+			}
 		}
 	}
 
@@ -104,6 +122,6 @@ public abstract class Insect
 
 	public String toString()
 	{
-		return this.getClass().getName()+"["+armor+", "+place+"]"; //supports inheritance!
+		return this.getClass().getName()+"["+armor+", "+place+"]"; 
 	}
 }

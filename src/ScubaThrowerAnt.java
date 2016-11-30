@@ -1,3 +1,6 @@
+/**
+ * @author Ariana Fairbanks
+ */
 
 public class ScubaThrowerAnt extends ThrowerAnt 
 {

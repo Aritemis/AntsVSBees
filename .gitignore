@@ -45,3 +45,25 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+bin/AntGame$ImageUtils.class
+bin/AntGame$AnimPosition.class
+bin/BodyguardAnt.class
+bin/Containing.class
+bin/AntsVsSomeBees.class
+bin/AntGame.class
+bin/FireAnt.class
+bin/Hive.class
+bin/HarvesterAnt.class
+bin/Bee.class
+bin/LongThrowerAnt.class
+bin/Place.class
+bin/Insect.class
+bin/ShortThrowerAnt.class
+bin/NinjaAnt.class
+bin/Ant.class
+bin/AntColony.class
+bin/HungryAnt.class
+bin/ScubaThrowerAnt.class
+bin/Water.class
+bin/WallAnt.class
+bin/ThrowerAnt.class
